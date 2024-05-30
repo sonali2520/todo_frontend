@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Context, server } from '../main';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
 function Header(props) {
     
-    const {isAuthenticated,setisAuthenticated,loading,setLoading}=useContext(Context);
+    const {isAuthenticated,setisAuthenticated,loading,setLoading,setRefresh}=useContext(Context);
 
     
     const submitHandler=async (e)=>{
@@ -28,6 +28,8 @@ function Header(props) {
         }
    }
 
+  
+
     return (
         <>
           <nav className='header'>
@@ -36,7 +38,6 @@ function Header(props) {
             </div>
             <article>
                 <Link to={"/"}>Home</Link>
-                <Link to={"/profile"}>Profile</Link>
                 {
                     isAuthenticated ? (<button className='btn' disabled={loading} onClick={submitHandler}>Logout</button>) : (<Link to={"/login"}>Login</Link>)
                 }
